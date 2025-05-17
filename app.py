@@ -25,48 +25,47 @@ filtered_df = df[
 
 st.markdown(f"#### 🔎 조회 결과: {len(filtered_df)}개 성취기준")
 
-# 스타일 및 JavaScript 복사 기능
+# CSS + JavaScript (복사 알림 포함)
 st.markdown("""
 <style>
-.custom-table {
+.copy-table {
     width: 100%;
     border-collapse: collapse;
     font-size: 14px;
 }
-.custom-table th, .custom-table td {
-    border: 1px solid #ddd;
+.copy-table th, .copy-table td {
+    border: 1px solid #ccc;
     padding: 6px 10px;
     text-align: left;
-    vertical-align: middle;
 }
-.custom-table th {
-    background-color: #f2f2f2;
+.copy-table th {
+    background-color: #f0f0f0;
 }
 .copy-button {
-    padding: 4px 8px;
-    font-size: 13px;
-    border: 1px solid #aaa;
-    border-radius: 5px;
-    cursor: pointer;
     background-color: #eee;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    padding: 4px 8px;
+    cursor: pointer;
+    font-size: 13px;
 }
 .toast {
     visibility: hidden;
-    min-width: 180px;
+    min-width: 200px;
     background-color: #323232;
     color: #fff;
     text-align: center;
-    border-radius: 4px;
-    padding: 6px;
+    border-radius: 5px;
+    padding: 8px;
     position: fixed;
-    z-index: 9999;
+    z-index: 1;
     right: 30px;
     bottom: 30px;
-    font-size: 14px;
+    font-size: 16px;
 }
 .toast.show {
     visibility: visible;
-    animation: fadein 0.4s, fadeout 0.4s 1.4s;
+    animation: fadein 0.5s, fadeout 0.5s 1.5s;
 }
 @keyframes fadein {
     from {bottom: 10px; opacity: 0;}
@@ -85,19 +84,42 @@ function copyToClipboard(text) {
     navigator.clipboard.writeText(text).then(function() {
         var toast = document.getElementById("toast");
         toast.className = "toast show";
-        setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 1800);
+        setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 2000);
     });
 }
 </script>
 """, unsafe_allow_html=True)
 
-# 테이블 출력 (주의: 맨 앞 줄에 공백 없음!)
-table_html = "<table class='custom-table'>"
-table_html += "<thead><tr><th>학년군</th><th>과목</th><th>내용영역</th><th>성취기준 코드</th><th>성취기준</th><th>복사</th></tr></thead><tbody>"
+# 테이블 구성 시작
+table_html = """
+<table class='copy-table'>
+<thead>
+<tr>
+<th>학년군</th>
+<th>과목</th>
+<th>내용영역</th>
+<th>성취기준 코드</th>
+<th>성취기준</th>
+<th>복사</th>
+</tr>
+</thead>
+<tbody>
+"""
 
 for _, row in filtered_df.iterrows():
-    full_text = f"{row['성취기준 코드']} {row['성취기준']}".replace("'", "\\'")
-    table_html += f"<tr><td>{row['학년군']}</td><td>{row['과목명']}</td><td>{row['과목의 내용영역']}</td><td>{row['성취기준 코드']}</td><td>{row['성취기준']}</td><td><button class='copy-button' onclick=\"copyToClipboard('{full_text}')\">📋 복사</button></td></tr>"
+    code = row['성취기준 코드']
+    content = row['성취기준']
+    copy_text = f"{code} {content}".replace("'", "\\'")
+    table_html += f"""
+    <tr>
+        <td>{row['학년군']}</td>
+        <td>{row['과목명']}</td>
+        <td>{row['과목의 내용영역']}</td>
+        <td>{code}</td>
+        <td>{content}</td>
+        <td><button class='copy-button' onclick="copyToClipboard('{copy_text}')">📋 복사</button></td>
+    </tr>
+    """
 
 table_html += "</tbody></table>"
 
