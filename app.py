@@ -43,12 +43,12 @@ st.markdown(
 )
 
 # 🧾 성취기준 코드 + 내용 출력 (코드 컨테이너로 복사 가능)
-for _, row in filtered_df.iterrows():
+for _, row in available_areas.iterrows():
     full_text = f"{row['성취기준 코드']} {row['성취기준']}"
     st.code(full_text, language='text')
 
 # 📥 CSV 다운로드
-csv = filtered_df.to_csv(index=False).encode('utf-8-sig')
+csv = available_areas.to_csv(index=False).encode('utf-8-sig')
 st.download_button(
     label="📥 조회 결과 CSV 다운로드",
     data=csv,
