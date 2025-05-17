@@ -29,7 +29,7 @@ selected_area = st.sidebar.selectbox("내용영역(단원) 선택", sorted(avail
 # 📚 제목
 st.title("📚 2022 개정교육과정 성취기준 조회")
 
-# 🧾 선택된 필터 정보 상단에 한 줄로 표시
+# 💬 필터 정보 요약 - 반드시 f""" 문자열 안에 포함되어야 함
 st.markdown(
     f"""
     <div style='padding: 10px 0; font-size:16px;'>
@@ -38,9 +38,9 @@ st.markdown(
     📂 <b>{selected_area}</b> &nbsp;&nbsp; | &nbsp;&nbsp;
     🔍 <b>{len(filtered_df)}개 성취기준</b> 조회됨
     </div>
-    """, unsafe_allow_html=True
+    """,
+    unsafe_allow_html=True
 )
-
 
 # 🧾 성취기준 코드 + 내용 출력 (코드 컨테이너로 복사 가능)
 for _, row in filtered_df.iterrows():
