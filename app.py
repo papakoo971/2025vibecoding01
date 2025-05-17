@@ -9,6 +9,9 @@ def load_data():
 
 df = load_data()
 
+
+st.write("🔍 현재 데이터프레임 열 목록:", df.columns.tolist())
+
 # 🔍 사이드바 필터 설정
 selected_grade = st.sidebar.selectbox("학년군 선택", sorted(df["학년군"].unique()))
 selected_subject = st.sidebar.selectbox("과목 선택", sorted(df["과목"].unique()))
