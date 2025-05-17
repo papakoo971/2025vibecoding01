@@ -4,8 +4,8 @@ import pandas as pd
 # CSV 파일 불러오기
 @st.cache_data
 def load_data():
-    url = "https://raw.githubusercontent.com/papakoo971/2025vibcoding01/main/korean_curriculum_standards.csv"
-    return pd.read_csv(url)
+    url = "https://raw.githubusercontent.com/papakoo971/2025vibecoding01/main/korean_curriculum_standards.csv"
+    return pd.read_csv(url, encoding='utf-8-sig')
 
 df = load_data()
 
