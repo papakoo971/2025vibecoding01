@@ -27,15 +27,77 @@ filtered_df = df[
 
 st.markdown(f"#### 🔎 조회 결과: {len(filtered_df)}개 성취기준")
 
-# 복사 버튼 포함 출력
+# 복사 기능 + 알림 메시지용 JS & CSS
+st.markdown("""
+<style>
+.copy-box {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    position: relative;
+}
+.copy-button {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    background-color: #f0f0f0;
+    border: 1px solid #aaa;
+    padding: 3px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.toast {
+    visibility: hidden;
+    min-width: 200px;
+    background-color: #323232;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 8px;
+    position: fixed;
+    z-index: 1;
+    right: 30px;
+    bottom: 30px;
+    font-size: 16px;
+}
+.toast.show {
+    visibility: visible;
+    animation: fadein 0.5s, fadeout 0.5s 1.5s;
+}
+@keyframes fadein {
+    from {bottom: 10px; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+}
+@keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 10px; opacity: 0;}
+}
+</style>
+
+<div id="toast" class="toast">✅ 성취기준이 복사되었습니다.</div>
+
+<script>
+function copyToClipboard(text) {
+    navigator.clipboard.writeText(text).then(function() {
+        var toast = document.getElementById("toast");
+        toast.className = "toast show";
+        setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 2000);
+    });
+}
+</script>
+""", unsafe_allow_html=True)
+
+# 항목 출력
 for i, row in filtered_df.iterrows():
     code = row["성취기준 코드"]
     content = row["성취기준"]
-    copy_text = f"{code} {content}"
+    full_text = f"{code} {content}".replace("'", "\\'")
+    
     st.markdown(f"""
-        <div style="border:1px solid #ccc; padding:10px; border-radius:6px; margin-bottom:5px;">
+        <div class="copy-box">
             <strong>{code}</strong>: {content}
-            <button onclick="navigator.clipboard.writeText('{copy_text}')" style="float:right; margin-left:10px;">📋 복사</button>
+            <button class="copy-button" onclick="copyToClipboard('{full_text}')">📋 복사</button>
         </div>
     """, unsafe_allow_html=True)
 
