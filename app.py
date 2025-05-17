@@ -4,7 +4,7 @@ import pandas as pd
 # CSV 파일 불러오기
 @st.cache_data
 def load_data():
-    url = "https://raw.githubusercontent.com/사용자명/저장소명/브랜치명/korean_curriculum_standards.csv"
+    url = "https://raw.githubusercontent.com/papakoo971/2025vibcoding01/main/korean_curriculum_standards.csv"
     return pd.read_csv(url)
 
 df = load_data()
