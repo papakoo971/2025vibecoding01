@@ -22,8 +22,8 @@ selected_subject = st.sidebar.selectbox("과목 선택", sorted(available_subjec
 available_areas = df[
     (df["학년군"] == selected_grade) &
     (df["과목"] == selected_subject)
-]["과목의  내용영역"].dropna().unique()
-selected_area = st.sidebar.selectbox("내용영역 선택", sorted(available_areas))
+]["내용영역(단원)"].dropna().unique()
+selected_area = st.sidebar.selectbox("내용영역(단원) 선택", sorted(available_areas))
 
 
 # 📚 제목
