@@ -41,6 +41,7 @@ st.markdown(
     """, unsafe_allow_html=True
 )
 
+
 # 🧾 성취기준 코드 + 내용 출력 (코드 컨테이너로 복사 가능)
 for _, row in filtered_df.iterrows():
     full_text = f"{row['성취기준 코드']} {row['성취기준']}"
