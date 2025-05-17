@@ -33,10 +33,6 @@ for idx, row in filtered_df.iterrows():
     
     with col1:
         st.code(full_text, language='text')
-    with col2:
-        if st.button("📋", key=f"copy_{idx}"):
-            st.session_state["copied_text"] = full_text
-            st.success("✅ 복사되었습니다!", icon="📌")
 
 # CSV 다운로드
 csv = filtered_df.to_csv(index=False).encode('utf-8-sig')
