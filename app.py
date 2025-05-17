@@ -15,13 +15,13 @@ df = load_data()
 selected_grade = st.sidebar.selectbox("학년군 선택", sorted(df["학년군"].dropna().unique()))
 
 # 학년군에 종속된 과목 필터링
-available_subjects = df[df["학년군"] == selected_grade]["과목명"].dropna().unique()
+available_subjects = df[df["학년군"] == selected_grade]["과목"].dropna().unique()
 selected_subject = st.sidebar.selectbox("과목 선택", sorted(available_subjects))
 
 # 과목에 종속된 내용영역 필터링
 available_areas = df[
     (df["학년군"] == selected_grade) &
-    (df["과목명"] == selected_subject)
+    (df["과목"] == selected_subject)
 ]["과목의  내용영역"].dropna().unique()
 selected_area = st.sidebar.selectbox("내용영역 선택", sorted(available_areas))
 
