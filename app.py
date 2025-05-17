@@ -26,7 +26,7 @@ filtered_df = df[
 ].reset_index(drop=True)
 
 # 📚 제목
-st.title("📚 2022 개정교육과정 성취기준 조회사이트")
+st.title("📚 2022 개정교육과정 성취기준 조회")
 
 # 🧾 선택된 필터 정보 상단에 한 줄로 표시
 st.markdown(
