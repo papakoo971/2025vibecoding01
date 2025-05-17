@@ -25,21 +25,21 @@ filtered_df = df[
 
 st.markdown(f"#### 🔎 조회 결과: {len(filtered_df)}개 성취기준")
 
-# 스타일 및 복사 기능 정의
+# 스타일 및 JavaScript 복사 기능
 st.markdown("""
 <style>
-table.custom-table {
+.custom-table {
     width: 100%;
     border-collapse: collapse;
     font-size: 14px;
 }
-table.custom-table th, table.custom-table td {
+.custom-table th, .custom-table td {
     border: 1px solid #ddd;
     padding: 6px 10px;
     text-align: left;
     vertical-align: middle;
 }
-table.custom-table th {
+.custom-table th {
     background-color: #f2f2f2;
 }
 .copy-button {
@@ -91,41 +91,19 @@ function copyToClipboard(text) {
 </script>
 """, unsafe_allow_html=True)
 
-# 테이블 시작
-table_html = """
-<table class="custom-table">
-<thead>
-<tr>
-<th>학년군</th>
-<th>과목</th>
-<th>내용영역</th>
-<th>성취기준 코드</th>
-<th>성취기준</th>
-<th>복사</th>
-</tr>
-</thead>
-<tbody>
-"""
+# 테이블 출력 (주의: 맨 앞 줄에 공백 없음!)
+table_html = "<table class='custom-table'>"
+table_html += "<thead><tr><th>학년군</th><th>과목</th><th>내용영역</th><th>성취기준 코드</th><th>성취기준</th><th>복사</th></tr></thead><tbody>"
 
 for _, row in filtered_df.iterrows():
-    full = f"{row['성취기준 코드']} {row['성취기준']}".replace("'", "\\'")
-    table_html += f"""
-    <tr>
-        <td>{row['학년군']}</td>
-        <td>{row['과목명']}</td>
-        <td>{row['과목의 내용영역']}</td>
-        <td>{row['성취기준 코드']}</td>
-        <td>{row['성취기준']}</td>
-        <td><button class="copy-button" onclick="copyToClipboard('{full}')">📋 복사</button></td>
-    </tr>
-    """
+    full_text = f"{row['성취기준 코드']} {row['성취기준']}".replace("'", "\\'")
+    table_html += f"<tr><td>{row['학년군']}</td><td>{row['과목명']}</td><td>{row['과목의 내용영역']}</td><td>{row['성취기준 코드']}</td><td>{row['성취기준']}</td><td><button class='copy-button' onclick=\"copyToClipboard('{full_text}')\">📋 복사</button></td></tr>"
 
 table_html += "</tbody></table>"
 
-# 테이블 출력
 st.markdown(table_html, unsafe_allow_html=True)
 
-# 다운로드 버튼
+# CSV 다운로드
 csv = filtered_df.to_csv(index=False).encode('utf-8-sig')
 st.download_button(
     label="📥 조회 결과 CSV 다운로드",
