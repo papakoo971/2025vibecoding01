@@ -4,7 +4,7 @@ import pandas as pd
 # CSV 파일 로드
 @st.cache_data
 def load_data():
-    url = "https://raw.githubusercontent.com/papakoo971/2025vibecoding01/main/korean_curriculum_standards.csv"
+    url = "https://raw.githubusercontent.com/papakoo971/2025vibecoding01/main/2022_curri_elementray.csv"
     return pd.read_csv(url, encoding='utf-8-sig')
 
 df = load_data()
