@@ -10,7 +10,6 @@ def load_data():
 df = load_data()
 
 # 🔍 사이드바 필터 설정
-st.sidebar.title("🔍 필터 설정")
 selected_grade = st.sidebar.selectbox("학년군 선택", sorted(df["학년군"].unique()))
 selected_subject = st.sidebar.selectbox("과목 선택", sorted(df["과목"].unique()))
 selected_area = st.sidebar.selectbox(
@@ -18,12 +17,14 @@ selected_area = st.sidebar.selectbox(
     sorted(df[df["과목"] == selected_subject]["내용영역(단원)"].unique())
 )
 
+
 # 🔎 필터링된 데이터프레임
 filtered_df = df[
     (df["학년군"] == selected_grade) &
     (df["과목"] == selected_subject) &
     (df["내용영역(단원)"] == selected_area)
 ].reset_index(drop=True)
+
 
 # 📚 제목
 st.title("📚 2022 개정교육과정 성취기준 조회")
