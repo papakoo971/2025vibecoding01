@@ -26,6 +26,14 @@ available_areas = df[
 selected_area = st.sidebar.selectbox("내용영역(단원) 선택", sorted(available_areas))
 
 
+# 필터링 이후
+filtered_df = df[
+    (df["학년군"] == selected_grade) &
+    (df["과목명"] == selected_subject) &
+    (df["과목의내용영역"] == selected_area)
+].reset_index(drop=True)
+
+
 # 📚 제목
 st.title("📚 2022 개정교육과정 성취기준 조회")
 
