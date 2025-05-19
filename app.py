@@ -52,15 +52,15 @@ st.markdown(
 # 🧾 성취기준 코드 + 내용 출력
 for _, row in filtered_df.iterrows():
     full_text = f"{row['성취기준코드']} {row['성취기준']}"
-    st.code( f"""
-        <div style="background-color: #f0f0f0; padding: 10px 15px; 
-                    border-radius: 10px; margin-bottom: 10px; 
-                    font-family: monospace; font-size: 14px;
-                    max-width: 800px; word-wrap: break-word;">
-            {full_text}
+   st.markdown(
+        f"""
+        <div style="background-color:#f0f0f0; padding: 8px 12px; margin-bottom: 10px;
+                    border-radius: 6px; width: 600px; word-wrap: break-word; font-family: monospace;">
+        {full_text}
         </div>
         """,
-        unsafe_allow_html=True, language='text')
+        unsafe_allow_html=True
+    )
 
 # 📥 CSV 다운로드
 csv = filtered_df.to_csv(index=False).encode('utf-8-sig')
