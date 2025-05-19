@@ -49,17 +49,29 @@ st.markdown(
     unsafe_allow_html=True)
 
 # 🧾 성취기준 코드 + 내용 출력
-for _, row in filtered_df.iterrows():
-    full_text = f"{row['성취기준코드']} {row['성취기준']}"
+for i, row in filtered_df.iterrows():
+    code = row["성취기준코드"]
+    content = row["성취기준"]
+    full_text = f"{code} {content}"
+    
+    # 각 영역에 고유 ID 부여
+    element_id = f"copy-target-{i}"
+
     st.markdown(
         f"""
-        <div style="background-color:#f0f0f0; padding: 8px 12px; margin-bottom: 10px;
-                    border-radius: 6px; width: 600px; word-wrap: break-word; font-family: monospace;">
-        {full_text}
+        <div style="background-color:#f9f9f9; border-left: 5px solid #ccc; padding: 10px 14px; 
+                    margin-bottom: 12px; width: 600px; font-family: monospace; white-space: pre-wrap;
+                    word-break: break-word; position: relative; border-radius: 6px;">
+            <div id="{element_id}">{full_text}</div>
+            <button onclick="navigator.clipboard.writeText(document.getElementById('{element_id}').innerText)"
+                    style="position: absolute; top: 10px; right: 10px;
+                           background-color: #eee; border: none; padding: 4px 8px; border-radius: 4px;
+                           cursor: pointer; font-size: 12px;">📋 복사</button>
         </div>
         """,
         unsafe_allow_html=True
     )
+
 
 # 📥 CSV 다운로드
 csv = filtered_df.to_csv(index=False).encode('utf-8-sig')
