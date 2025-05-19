@@ -42,7 +42,7 @@ st.markdown(
     🎓 <b>학년군: {selected_grade}</b> &nbsp;&nbsp; | &nbsp;&nbsp;
     📘 <b>과목: {selected_subject}</b> &nbsp;&nbsp; | &nbsp;&nbsp;
     📂 <b>내용영역(단원): {selected_area}</b> &nbsp;&nbsp; | &nbsp;&nbsp;
-    🔍 <b>{len(filtered_df)}개 성취기준</b> 조회됨
+    🔍 <b>{len(filtered_df)}개 성취기준</b>
     </div>
     """,
     unsafe_allow_html=True
