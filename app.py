@@ -46,8 +46,7 @@ st.markdown(
     🔍 <b>{len(filtered_df)}개 성취기준</b>
     </div>
     """,
-    unsafe_allow_html=True
-)
+    unsafe_allow_html=True)
 
 # 🧾 성취기준 코드 + 내용 출력
 for _, row in filtered_df.iterrows():
