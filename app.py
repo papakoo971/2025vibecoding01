@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+st.set_page_config(layout="wide")
 
 # CSV 파일 로드
 @st.cache_data
