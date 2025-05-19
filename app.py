@@ -39,9 +39,9 @@ st.title("📚 2022 개정교육과정 성취기준 조회")
 st.markdown(
     f"""
     <div style='padding: 10px 0; font-size:16px;'>
-    🎓 <b>학년군 {selected_grade}</b> &nbsp;&nbsp; | &nbsp;&nbsp;
-    📘 <b>과목 {selected_subject}</b> &nbsp;&nbsp; | &nbsp;&nbsp;
-    📂 <b>내용영역(단원){selected_area}</b> &nbsp;&nbsp; | &nbsp;&nbsp;
+    🎓 <b>학년군: {selected_grade}</b> &nbsp;&nbsp; | &nbsp;&nbsp;
+    📘 <b>과목: {selected_subject}</b> &nbsp;&nbsp; | &nbsp;&nbsp;
+    📂 <b>내용영역(단원): {selected_area}</b> &nbsp;&nbsp; | &nbsp;&nbsp;
     🔍 <b>{len(filtered_df)}개 성취기준</b> 조회됨
     </div>
     """,
