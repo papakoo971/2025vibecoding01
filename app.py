@@ -51,7 +51,7 @@ st.markdown(
 # 🧾 성취기준 코드 + 내용 출력
 for _, row in filtered_df.iterrows():
     full_text = f"{row['성취기준코드']} {row['성취기준']}"
-   st.markdown(
+    st.markdown(
         f"""
         <div style="background-color:#f0f0f0; padding: 8px 12px; margin-bottom: 10px;
                     border-radius: 6px; width: 600px; word-wrap: break-word; font-family: monospace;">
